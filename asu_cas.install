@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * Updating the WebSpark Default Theme from "OpenASU Bootstrap"
+ * to "ASU WebSpark Bootstrap". 
+ */
+function asu_cas_update_7000(&$sandbox) {
+
+  // If they are running the old theme, update them.
+  $oldtheme = 'openasu_bootstrap';
+  if (variable_get('theme_default') == $oldtheme) {
+
+    // Update the Current ASU Theme
+    $basetheme = 'kalatheme';
+    $theme = 'asu_webspark_bootstrap';
+    system_rebuild_theme_data();
+    drupal_theme_rebuild();
+    theme_enable(array($basetheme));
+    theme_enable(array($theme));
+    variable_set('theme_default', $theme);
+
+
+    // Update the Theme Settings
+    $old_settings = variable_get('theme_openasu_bootstrap_settings', array());
+    $new_settings = variable_get('theme_asu_webspark_bootstrap_settings', array());
+    $merged_settings = array_merge($old_settings, $new_settings);
+    variable_set('theme_asu_webspark_bootstrap_settings', $merged_settings);
+
+  }
+
+  return t('Updated to Latest and Greatest Theme. Migrated settings.');
+}
