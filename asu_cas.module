@@ -25,11 +25,11 @@ function asu_cas_boot() {
 /**
  * Implememtation of hook_system_info_alter()
  *
- * This is designed to update the subtheme from openasu_bootstrap to 
+ * This is designed to update the subtheme from openasu_bootstrap to
  * asu_webspark_bootstrap as part of the 1.0 release.
  */
 function asu_cas_system_info_alter(&$info, $file, $type) {
-  if ($type == 'theme' && $info['base theme'] == 'openasu_bootstrap') {
+  if ($type == 'theme' && isset($info['base theme']) && $info['base theme'] == 'openasu_bootstrap') {
     $info['base theme'] = 'asu_webspark_bootstrap';
   }
 }
